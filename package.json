@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "dev": "wing it src/main.w"
+  },
+  "dependencies": {
+    "winglang": "^0.70.18"
+  }
+}
