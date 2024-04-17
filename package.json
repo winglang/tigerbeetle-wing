@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "wing it src/main.w"
+    "dev": "wing it src/main.w",
+    "test": "wing test src"
   },
   "dependencies": {
     "winglang": "^0.70.19"
