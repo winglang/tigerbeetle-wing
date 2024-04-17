@@ -9,7 +9,7 @@ export const createClient: extern["createClient"] = async (options) => {
   });
 
   return {
-    createAccounts(batch) {
+    async createAccounts(batch) {
       return client.createAccounts(
         batch.map((account) => ({
           code: account.code,
@@ -28,7 +28,7 @@ export const createClient: extern["createClient"] = async (options) => {
         }))
       );
     },
-    createTransfers(batch) {
+    async createTransfers(batch) {
       return client.createTransfers(
         batch.map((transfer) => ({
           id: BigInt(transfer.id),
