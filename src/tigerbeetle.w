@@ -107,10 +107,14 @@ pub class TigerBeetle impl TigerBeetleClient {
       let dataFilename = "{this.node.addr.substring(0, 8)}.tigerbeetle";
 
       let createDataService = new cloud.Service(inflight () => {
-         if !fs.exists("{pwd}/data/{dataFilename}") {
+         fs.remove("{pwd}/data/{dataFilename}", force: true);
+         try {
             util.shell(
                "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster={this.cluster} --replica={this.replica} --replica-count={this.replicaCount} /data/{dataFilename}",
             );
+         } catch error {
+            // pass
+            log("failed to format data file data/{dataFilename}. error: {error}");
          }
       }) as "CreateDataService";
       nodeof(createDataService).hidden = true;

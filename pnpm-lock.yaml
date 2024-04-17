@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   tigerbeetle-node@0.15.3:
-    hash: xvcibunci6dtedyir5ozo3fofy
+    hash: xnurh24pa6pxvxn4spo3vcmocq
     path: patches/tigerbeetle-node@0.15.3.patch
 
 dependencies:
@@ -17,7 +17,7 @@ dependencies:
 devDependencies:
   tigerbeetle-node:
     specifier: ^0.15.3
-    version: 0.15.3(patch_hash=xvcibunci6dtedyir5ozo3fofy)
+    version: 0.15.3(patch_hash=xnurh24pa6pxvxn4spo3vcmocq)
 
 packages:
 
@@ -2355,7 +2355,7 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: false
 
-  /tigerbeetle-node@0.15.3(patch_hash=xvcibunci6dtedyir5ozo3fofy):
+  /tigerbeetle-node@0.15.3(patch_hash=xnurh24pa6pxvxn4spo3vcmocq):
     resolution: {integrity: sha512-ag/oiBclTedgCZTa/dkiNdvecPRMFcqGbEynQgR5DVbyANdC9xOw9WAiTzGBJJoIVB6K/TTtbu+e2sAlkhi1tw==}
     engines: {node: '>=14.0.0'}
     dev: true

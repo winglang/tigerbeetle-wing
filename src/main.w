@@ -12,6 +12,48 @@ let randomBigInt = inflight () => {
    return "{math.round(math.random() * 1000)}";
 };
 
+new cloud.Function(inflight () => {
+   let accountId1 = randomBigInt();
+   let accountId2 = randomBigInt();
+   log("Creating two accounts (ids {accountId1} and {accountId2})...");
+   let accountErrors = instance.createAccounts([
+      {
+         id: accountId1,
+         debits_pending: "0",
+         debits_posted: "0",
+         credits_pending: "0",
+         credits_posted: "0",
+         user_data_128: "0",
+         user_data_64: "0",
+         user_data_32: 0,
+         reserved: 0,
+         ledger: 1,
+         code: 1,
+         flags: 0,
+         timestamp: "0",
+      },
+      {
+         id: accountId2,
+         debits_pending: "0",
+         debits_posted: "0",
+         credits_pending: "0",
+         credits_posted: "0",
+         user_data_128: "0",
+         user_data_64: "0",
+         user_data_32: 0,
+         reserved: 0,
+         ledger: 1,
+         code: 1,
+         flags: 0,
+         timestamp: "0",
+      },
+   ]);
+   for error in accountErrors {
+      log("createAccounts error: {error.index} {error.result}");
+   }
+   assert(accountErrors.length == 0, "createAccounts failed");
+}) as "CreateAccountsExample";
+
 test "Create accounts and transfer" {
    let accountId1 = randomBigInt();
    let accountId2 = randomBigInt();
