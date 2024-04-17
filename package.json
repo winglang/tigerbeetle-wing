@@ -4,9 +4,12 @@
     "test": "wing test src"
   },
   "dependencies": {
+    "@cdktf/provider-aws": "^19.14.0",
     "winglang": "^0.70.19"
   },
   "devDependencies": {
+    "cdktf": "^0.20.7",
+    "constructs": "^10.3.0",
     "tigerbeetle-node": "^0.15.3"
   },
   "pnpm": {

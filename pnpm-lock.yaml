@@ -10,16 +10,36 @@ patchedDependencies:
     path: patches/tigerbeetle-node@0.15.3.patch
 
 dependencies:
+  '@cdktf/provider-aws':
+    specifier: ^19.14.0
+    version: 19.14.0(cdktf@0.20.7)(constructs@10.3.0)
   winglang:
     specifier: ^0.70.19
     version: 0.70.19(constructs@10.3.0)(typescript@5.4.5)
 
 devDependencies:
+  cdktf:
+    specifier: ^0.20.7
+    version: 0.20.7(constructs@10.3.0)
+  constructs:
+    specifier: ^10.3.0
+    version: 10.3.0
   tigerbeetle-node:
     specifier: ^0.15.3
     version: 0.15.3(patch_hash=xnurh24pa6pxvxn4spo3vcmocq)
 
 packages:
+
+  /@cdktf/provider-aws@19.14.0(cdktf@0.20.7)(constructs@10.3.0):
+    resolution: {integrity: sha512-00AeWFyT+FWgkTf1h/hoUJGGL5l3RAtG32qtU+6k+PXfIn6vQz3weuRMonQdHGcKIQAuJrqXmEckOR26Hx/ClQ==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      cdktf: ^0.20.0
+      constructs: ^10.3.0
+    dependencies:
+      cdktf: 0.20.7(constructs@10.3.0)
+      constructs: 10.3.0
+    dev: false
 
   /@esbuild/aix-ppc64@0.19.12:
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -825,6 +845,17 @@ packages:
       set-function-length: 1.2.2
     dev: false
 
+  /cdktf@0.20.7(constructs@10.3.0):
+    resolution: {integrity: sha512-7za8QQYM1G0/6JUCYY+5smwNfNfbiZVPCMD7SeX2rTYmOLaGEkHZtMvuUTEKSqsE56fKudnfVd2J2edz2CETFg==}
+    peerDependencies:
+      constructs: ^10.0.25
+    dependencies:
+      constructs: 10.3.0
+    bundledDependencies:
+      - archiver
+      - json-stable-stringify
+      - semver
+
   /chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
@@ -918,7 +949,6 @@ packages:
   /constructs@10.3.0:
     resolution: {integrity: sha512-vbK8i3rIb/xwZxSpTjz3SagHn1qq9BChLEfy5Hf6fB3/2eFbrwt2n9kHwQcS0CPTRBesreeAcsJfMq2229FnbQ==}
     engines: {node: '>= 16.14.0'}
-    dev: false
 
   /content-disposition@0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
