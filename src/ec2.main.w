@@ -1,24 +1,7 @@
 bring "cdktf" as cdktf;
 bring "@cdktf/provider-aws" as aws;
 
-// let ami = "ami-00c71bd4d220aa22a"; // Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2024-03-01
-// let userData = "#!/bin/bash
-// sudo apt update
-// sudo apt install -y build-essential cmake git
-// git clone https://github.com/coilhq/tigerbeetle.git tigerbeetle-src
-// ./tigerbeetle-src/bootstrap.sh
-
-// ./tigerbeetle-src/tigerbeetle format --cluster=0 --replica=0 --replica-count=1 0_0.tigerbeetle
-
-// ./tigerbeetle-src/tigerbeetle start --addresses=3000 0_0.tigerbeetle
-// ";
-
-// let ami = "ami-0720246d895625a23"; // Amazon Linux 2 Kernel 5.10 AMI 2.0.20240329.0 x86_64 HVM gp2
-// let instanceType: "t2.nano";
 let ami = "ami-0e8a62bd8368b0881"; // Amazon Linux 2 LTS Arm64 Kernel 5.10 AMI 2.0.20240329.0 arm64 HVM gp2
-// let instanceType = "t4g.nano";
-// let instanceType = "t4g.micro";
-// let instanceType = "t4g.small";
 let instanceType = "t4g.large";
 let userData = "#!/bin/bash
 sudo yum update -y
@@ -129,7 +112,6 @@ let instance = new aws.instance.Instance(
    //    deleteOnTermination: true,
    // },
 );
-
 
 new cdktf.TerraformOutput(
    value: instance.publicIp,
