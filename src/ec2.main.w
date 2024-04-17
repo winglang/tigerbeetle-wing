@@ -103,7 +103,8 @@ let instance = new aws.instance.Instance(
    instanceType: instanceType,
    userData: userData,
    associatePublicIpAddress: true,
-   subnetId: privateSubnet.id,
+   // subnetId: privateSubnet.id,
+   subnetId: publicSubnet.id,
    vpcSecurityGroupIds: [securityGroup.id],
    iamInstanceProfile: "SSM",
    // rootBlockDevice: {
