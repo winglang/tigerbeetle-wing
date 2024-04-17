@@ -3,6 +3,9 @@
     "dev": "wing it src/main.w"
   },
   "dependencies": {
-    "winglang": "^0.70.18"
+    "winglang": "^0.70.19"
+  },
+  "devDependencies": {
+    "tigerbeetle-node": "^0.15.3"
   }
 }

@@ -6,8 +6,13 @@ settings:
 
 dependencies:
   winglang:
-    specifier: ^0.70.18
-    version: 0.70.18(constructs@10.3.0)(typescript@5.4.5)
+    specifier: ^0.70.19
+    version: 0.70.19(constructs@10.3.0)(typescript@5.4.5)
+
+devDependencies:
+  tigerbeetle-node:
+    specifier: ^0.15.3
+    version: 0.15.3
 
 packages:
 
@@ -317,7 +322,7 @@ packages:
       '@npmcli/promise-spawn': 7.0.1
       lru-cache: 10.2.0
       npm-pick-manifest: 9.0.0
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       promise-inflight: 1.0.1
       promise-retry: 2.0.1
       semver: 7.6.0
@@ -352,7 +357,7 @@ packages:
       cacache: 18.0.2
       json-parse-even-better-errors: 3.0.1
       pacote: 18.0.0
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       semver: 7.6.0
     transitivePeerDependencies:
       - bluebird
@@ -378,7 +383,7 @@ packages:
       hosted-git-info: 7.0.1
       json-parse-even-better-errors: 3.0.1
       normalize-package-data: 6.0.0
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       semver: 7.6.0
     transitivePeerDependencies:
       - bluebird
@@ -425,7 +430,7 @@ packages:
       '@npmcli/package-json': 5.0.3
       '@npmcli/promise-spawn': 7.0.1
       node-gyp: 10.1.0
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       which: 4.0.0
     transitivePeerDependencies:
       - bluebird
@@ -529,21 +534,21 @@ packages:
       minimatch: 9.0.4
     dev: false
 
-  /@wingcloud/framework@0.70.18(@winglang/sdk@0.70.18)(typescript@5.4.5):
-    resolution: {integrity: sha512-VI4WyP//3s+hNnlLGl/Ok4BQr35ale6+2OdArUAtHgo41P272dZqvTnpeb6PitbEIQLQDxMaql1YMyvXYI7x1g==}
+  /@wingcloud/framework@0.70.19(@winglang/sdk@0.70.19)(typescript@5.4.5):
+    resolution: {integrity: sha512-qLbMxk9/gv2v8M/dutAQj7w1Jm9psu+kt9/N6ctlZ3zb759/s/Hgbfv2V2fHaMqXxVjL4QYRCEhX/xkpefuaUA==}
     peerDependencies:
       '@winglang/sdk': '*'
       typescript: ^5.3.3
     dependencies:
-      '@winglang/sdk': 0.70.18(constructs@10.3.0)
+      '@winglang/sdk': 0.70.19(constructs@10.3.0)
       typescript: 5.4.5
     dev: false
 
-  /@wingconsole/app@0.70.18(constructs@10.3.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-PHfr3CizWkGzt3BxoGOSOivM8cTvYC0zZ4rXbfpVZHuLQ2G6+LgAVqPeyTLO6pnmK1xgd3OQpJ4cdXSNcuxH9Q==}
+  /@wingconsole/app@0.70.19(constructs@10.3.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-HqLu6znn600K6VWM1TFPF9eNo49VMFKA+eNtAxj4Xy6b9ozpUeh5k5Grbe0PC3l2VIXkApRzZJL1c3/SuHHTtA==}
     dependencies:
       '@segment/analytics-node': 1.3.0
-      '@wingconsole/server': 0.70.18(constructs@10.3.0)(typescript@5.4.5)
+      '@wingconsole/server': 0.70.19(constructs@10.3.0)(typescript@5.4.5)
       cross-spawn: 7.0.3
       express: 4.19.2
       open: 8.4.2
@@ -555,11 +560,11 @@ packages:
       - typescript
     dev: false
 
-  /@wingconsole/server@0.70.18(constructs@10.3.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-ktrtrN7v7xh2k87xfo+PyKIPfjXZXG2wty1vnPv6FCGcP6xU52xKDnj+NShN9XT9KqgK26UElRIF3IhvzxBgUA==}
+  /@wingconsole/server@0.70.19(constructs@10.3.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-AgpO9Nl6SokC7LjbLtp3ZaTVGPQL8aooq7qWk93uk+Ze4qxMtn+KxrZGITNGBL1RYkoq0GjvGGdGbQLU1HxW9w==}
     dependencies:
-      '@winglang/compiler': 0.70.18(constructs@10.3.0)(typescript@5.4.5)
-      '@winglang/sdk': 0.70.18(constructs@10.3.0)
+      '@winglang/compiler': 0.70.19(constructs@10.3.0)(typescript@5.4.5)
+      '@winglang/sdk': 0.70.19(constructs@10.3.0)
       codespan-wasm: 0.4.0
       debug: 4.3.4
       launch-editor: 2.6.1
@@ -570,12 +575,12 @@ packages:
       - typescript
     dev: false
 
-  /@winglang/compiler@0.70.18(constructs@10.3.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-4KId7xOzHb5N4yt99Z3Te3jxcNkTfGGIPNhOR8n8rYuAhDqLICOT44U84g1Y1YrPvrLNpnUnSzdWamy1jKh9cw==}
+  /@winglang/compiler@0.70.19(constructs@10.3.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-062I9n5PxyMEpJyEZWfaZQZs+Hgy69ueAiOtY+tqSJ2YIXgo3Lo6e/NAW4DA5DKu1+hagud6t0Akfpuf6jYi3Q==}
     engines: {node: '>=v20.0.0'}
     dependencies:
-      '@wingcloud/framework': 0.70.18(@winglang/sdk@0.70.18)(typescript@5.4.5)
-      '@winglang/sdk': 0.70.18(constructs@10.3.0)
+      '@wingcloud/framework': 0.70.19(@winglang/sdk@0.70.19)(typescript@5.4.5)
+      '@winglang/sdk': 0.70.19(constructs@10.3.0)
       jiti: 1.21.0
     transitivePeerDependencies:
       - constructs
@@ -584,8 +589,8 @@ packages:
     bundledDependencies:
       - wasi-js
 
-  /@winglang/sdk@0.70.18(constructs@10.3.0):
-    resolution: {integrity: sha512-aH+QLl1Xc1G+ey1a/4tuVz9+cNfSbDcyTr/IXEMJnR3yulLV/1zalKsntupZoLzuD0ng8zbZvUrYAp5HrnyKZA==}
+  /@winglang/sdk@0.70.19(constructs@10.3.0):
+    resolution: {integrity: sha512-JE7lM8ysnXvZmep0uYb0u3SUwfNxiK9jLTTXn0600ofRioBJo46gD4b611QGHRxaDJwwv9V2nJUwUJk2/GpVmA==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       constructs: ^10.3
@@ -1782,7 +1787,7 @@ packages:
     engines: {node: ^16.14.0 || >=18.0.0}
     dependencies:
       hosted-git-info: 7.0.1
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       semver: 7.6.0
       validate-npm-package-name: 5.0.0
     dev: false
@@ -1815,7 +1820,7 @@ packages:
       minipass-json-stream: 1.0.1
       minizlib: 2.1.2
       npm-package-arg: 11.0.2
-      proc-log: 4.1.0
+      proc-log: 4.2.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1900,7 +1905,7 @@ packages:
       npm-packlist: 8.0.2
       npm-pick-manifest: 9.0.0
       npm-registry-fetch: 16.2.1
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       promise-retry: 2.0.1
       read-package-json: 7.0.0
       read-package-json-fast: 3.0.2
@@ -1928,7 +1933,7 @@ packages:
       npm-packlist: 8.0.2
       npm-pick-manifest: 9.0.0
       npm-registry-fetch: 16.2.1
-      proc-log: 4.1.0
+      proc-log: 4.2.0
       promise-retry: 2.0.1
       read-package-json: 7.0.0
       read-package-json-fast: 3.0.2
@@ -1988,8 +1993,8 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: false
 
-  /proc-log@4.1.0:
-    resolution: {integrity: sha512-dmQ2iPw2nJMi9/4dpaG1wd0m1GE+K5kW7RGbjy5hoEEGnhPIzsm+klBO5RGGdcoYbWsNtU2KSNAdEldts+icLg==}
+  /proc-log@4.2.0:
+    resolution: {integrity: sha512-g8+OnU/L2v+wyiVK+D5fA34J7EH8jZ8DDlvwhRCMxmMj7UCBvxiO1mGeN+36JXIKF4zevU4kRBd8lVgG9vLelA==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: false
 
@@ -2345,6 +2350,11 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: false
 
+  /tigerbeetle-node@0.15.3:
+    resolution: {integrity: sha512-ag/oiBclTedgCZTa/dkiNdvecPRMFcqGbEynQgR5DVbyANdC9xOw9WAiTzGBJJoIVB6K/TTtbu+e2sAlkhi1tw==}
+    engines: {node: '>=14.0.0'}
+    dev: true
+
   /tiny-colors@2.1.3:
     resolution: {integrity: sha512-QKQBQx8Xm/jmaCDF8pdptiLWgmtbqEUgJnxqVeKQQcQP5XjGGImJ5hDHlDKAiwQhmp+xi3stYQZBedBMKzm+fw==}
     dev: false
@@ -2534,17 +2544,17 @@ packages:
       string-width: 4.2.3
     dev: false
 
-  /winglang@0.70.18(constructs@10.3.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-uzIXNHcFHx1uGGphtCNdXsR+vCR1EJv1uFWcZgv5DKscPw4RS72Z97rLiLqSIGz6Catnwui7+k1MCne8MJiwYg==}
+  /winglang@0.70.19(constructs@10.3.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-OSLdBNSajqODJiMYR+EMpsB9wZ/yiJ0HyRRxzRa33NmMjFIlM/EK6KUxv+YstF5ygpk4J+tWOqRCS2SHg74h3w==}
     engines: {node: '>=v18.0.0'}
     hasBin: true
     dependencies:
       '@npmcli/arborist': 7.4.2
       '@segment/analytics-node': 1.3.0
-      '@wingconsole/app': 0.70.18(constructs@10.3.0)(typescript@5.4.5)
-      '@wingconsole/server': 0.70.18(constructs@10.3.0)(typescript@5.4.5)
-      '@winglang/compiler': 0.70.18(constructs@10.3.0)(typescript@5.4.5)
-      '@winglang/sdk': 0.70.18(constructs@10.3.0)
+      '@wingconsole/app': 0.70.19(constructs@10.3.0)(typescript@5.4.5)
+      '@wingconsole/server': 0.70.19(constructs@10.3.0)(typescript@5.4.5)
+      '@winglang/compiler': 0.70.19(constructs@10.3.0)(typescript@5.4.5)
+      '@winglang/sdk': 0.70.19(constructs@10.3.0)
       chalk: 4.1.2
       codespan-wasm: 0.4.0
       commander: 10.0.1
