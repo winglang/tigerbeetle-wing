@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "wing it src/main.w",
-    "test": "wing test src"
+    "test": "wing test src/tigerbeetle.test.w"
   },
   "dependencies": {
     "@cdktf/provider-aws": "^19.14.0",
