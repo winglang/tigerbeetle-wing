@@ -128,7 +128,7 @@ pub class TigerBeetle impl TigerBeetleClient {
          ],
          args: [
             "start",
-            "--cache-grid=256MiB",
+            "--cache-grid=256MiB", // smaller cache size for local development
              "--addresses=0.0.0.0:3000",
              "/data/{dataFilename}",
          ],
