@@ -1,0 +1,13 @@
+diff --git a/dist/index.js b/dist/index.js
+index 6fed80944c91d932095c99f5f4b942ca472f31d0..6f92f431242526074013e6d355449bd0935251a4 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -44,7 +44,7 @@ const binding = (() => {
+             }
+         }
+     }
+-    const filename = `./bin/${archMap[arch]}-${platformMap[platform]}${extra}/client.node`;
++    const filename = `/Users/cristian/Code/tigerbeetle-wing/node_modules/tigerbeetle-node/dist/bin/${archMap[arch]}-${platformMap[platform]}${extra}/client.node`;
+     return require(filename);
+ })();
+ function createClient(args) {
