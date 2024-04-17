@@ -104,7 +104,7 @@ pub class TigerBeetle impl TigerBeetleClient {
       nodeof(resolvePwdService).hidden = true;
       let pwd = state.token("pwd");
 
-      let dataFilename = "{this.node.addr.substring(0, 8)}.tigerbeetle";
+      let dataFilename = "{this.node.addr.substring(this.node.addr.length - 8)}.tigerbeetle";
 
       let createDataService = new cloud.Service(inflight () => {
          fs.remove("{pwd}/data/{dataFilename}", force: true);
