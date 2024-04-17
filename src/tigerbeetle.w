@@ -86,7 +86,14 @@ struct TigerBeetleClientOptions {
 pub class TigerBeetle impl TigerBeetleClient {
    port: str;
    url: str;
+   cluster: str;
+   replica: str;
+   replicaCount: str;
    new() {
+      this.cluster = "0";
+      this.replica = "0";
+      this.replicaCount = "1";
+
       let state = new sim.State();
       nodeof(state).hidden = true;
 
@@ -102,7 +109,7 @@ pub class TigerBeetle impl TigerBeetleClient {
       let createDataService = new cloud.Service(inflight () => {
          if !fs.exists("{pwd}/data/{dataFilename}") {
             util.shell(
-               "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster=0 --replica=0 --replica-count=1 /data/{dataFilename}",
+               "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster={this.cluster} --replica={this.replica} --replica-count={this.replicaCount} /data/{dataFilename}",
             );
          }
       }) as "CreateDataService";
@@ -159,7 +166,7 @@ pub class TigerBeetle impl TigerBeetleClient {
 
    inflight new() {
       this.client = TigerBeetle.createClient(
-         cluster_id: "0",
+         cluster_id: this.cluster,
          concurrency_max: 100,
          replica_addresses: [
             this.port,
