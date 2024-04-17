@@ -1,4 +1,5 @@
 bring math;
+bring expect;
 bring "./tigerbeetle.w" as tigerbeetle;
 
 let instance = new tigerbeetle.TigerBeetle();
@@ -45,7 +46,7 @@ test "Create accounts and transfer" {
    for error in accountErrors {
       log("createAccounts error: {error.index} {error.result}");
    }
-   assert(accountErrors.length == 0, "createAccounts failed");
+   expect.equal(accountErrors.length, 0);
 
    let transferId = randomBigInt();
    log("Creating a transfer (id {transferId})...");
@@ -69,22 +70,20 @@ test "Create accounts and transfer" {
    for error in transferErrors {
       log("Batch transfer at {error.index} failed to create: {error.result}");
    }
-   assert(transferErrors.length == 0, "createTransfers failed");
+   expect.equal(transferErrors.length, 0);
 
    log("Looking up accounts...");
    let accounts = instance.lookupAccounts([accountId1, accountId2]);
-   assert(accounts.length == 2);
+   expect.equal(accounts.length, 2);
    for account in accounts {
       if (account.id == accountId1) {
-         assert(account.debits_posted == "10");
-         assert(account.credits_posted == "0");
+         expect.equal(account.debits_posted, "10");
+         expect.equal(account.credits_posted, "0");
       } elif (account.id == accountId2) {
-         assert(account.debits_posted == "0");
-         assert(account.credits_posted == "10");
+         expect.equal(account.debits_posted, "0");
+         expect.equal(account.credits_posted, "10");
       } else {
          throw "Unexpected account: {Json.stringify(account, indent: 2)}";
       }
    }
-
-   log("Ok");
 }
