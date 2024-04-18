@@ -6,11 +6,21 @@ let iamInstanceProfile = "SSM"; // Role name used to allow SSM to manage the ins
 let ami = "ami-0e8a62bd8368b0881"; // Amazon Linux 2 LTS Arm64 Kernel 5.10 AMI 2.0.20240329.0 arm64 HVM gp2
 // let instanceType = "t4g.large";
 let instanceType = "t4g.medium";
+// let userData = "#!/bin/bash
+// sudo yum update -y
+// sudo yum install git unzip -y
+// sudo mkdir /app
+// sudo chmod 777 /app
+// cd /app
+// git clone https://github.com/coilhq/tigerbeetle.git tigerbeetle-src --no-depth
+// ./tigerbeetle-src/bootstrap.sh
+// ./tigerbeetle-src/tigerbeetle format --cluster=0 --replica=0 --replica-count=1 0_0.tigerbeetle
+// ./tigerbeetle-src/tigerbeetle start --addresses=0.0.0.0:3000 0_0.tigerbeetle
+// ";
 let userData = "#!/bin/bash
-sudo yum update -y
-sudo yum install git unzip -y
-sudo mkdir /app
-sudo chmod 777 /app
+yum update -y
+yum install git unzip -y
+mkdir /app
 cd /app
 git clone https://github.com/coilhq/tigerbeetle.git tigerbeetle-src --no-depth
 ./tigerbeetle-src/bootstrap.sh
@@ -106,10 +116,9 @@ let instance = new aws.instance.Instance(
    instanceType: instanceType,
    userData: userData,
    associatePublicIpAddress: true,
-   subnetId: privateSubnet.id,
-   // subnetId: publicSubnet.id, // just to test locally without a bastion.
+   // subnetId: privateSubnet.id,
+   subnetId: publicSubnet.id, // Just for demo purposes.
    vpcSecurityGroupIds: [securityGroup.id],
-   // iamInstanceProfile: iamInstanceProfile,
    // rootBlockDevice: {
    //    volumeType: "gp3",
    //    volumeSize: 16, // Specifies the volume size in GB
@@ -117,23 +126,23 @@ let instance = new aws.instance.Instance(
    // },
 );
 
-let bastion = new aws.instance.Instance(
-   // ami: "ami-0e8a62bd8368b0881",
-   ami: "ami-00232bbfe70330a10", // Canonical, Ubuntu, 22.04 LTS, arm64 jammy image build on 2024-03-01
-   instanceType: "t4g.nano",
-   subnetId: privateSubnet.id,
-   vpcSecurityGroupIds: [securityGroup.id],
-   userData: "#!/bin/bash
-apt update
-apt install curl -y
-   ",
-   iamInstanceProfile: iamInstanceProfile,
-) as "Bastion";
-
 new cdktf.TerraformOutput(
    value: instance.publicIp,
 ) as "InstancePublicIP";
 
-new cdktf.TerraformOutput(
-   value: bastion.arn,
-) as "BastionARN";
+// let bastion = new aws.instance.Instance(
+//    // ami: "ami-0e8a62bd8368b0881",
+//    ami: "ami-00232bbfe70330a10", // Canonical, Ubuntu, 22.04 LTS, arm64 jammy image build on 2024-03-01
+//    instanceType: "t4g.nano",
+//    subnetId: privateSubnet.id,
+//    vpcSecurityGroupIds: [securityGroup.id],
+//    userData: "#!/bin/bash
+// apt update
+// apt install curl -y
+//    ",
+//    iamInstanceProfile: iamInstanceProfile,
+// ) as "Bastion";
+
+// new cdktf.TerraformOutput(
+//    value: bastion.arn,
+// ) as "BastionARN";

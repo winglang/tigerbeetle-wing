@@ -29,12 +29,7 @@ new cloud.Function(inflight (event) => {
          timestamp: "0",
       },
    ]);
-   for error in accountErrors {
-      log("createAccounts error: {error.index} {error.result}");
-   }
-   assert(accountErrors.length == 0, "createAccounts failed");
-
-   log("Account {accountId} created");
+   return unsafeCast(accountErrors);
 }) as "CreateAccount";
 
 new cloud.Function(inflight (event) => {
@@ -43,8 +38,7 @@ new cloud.Function(inflight (event) => {
 
    log("Looking up account {accountId}...");
    let accounts = instance.lookupAccounts([accountId]);
-   // log(unsafeCast(accounts.at(0)));
-   log("Account {accountId} = {Json.stringify(accounts.at(0), indent: 2)}");
+   return unsafeCast(accounts);
 }) as "LookupAccount";
 
 new cloud.Function(inflight (event) => {
@@ -74,10 +68,5 @@ new cloud.Function(inflight (event) => {
          timestamp: "0",
       },
    ]);
-   for error in transferErrors {
-      log("Batch transfer at {error.index} failed to create: {error.result}");
-   }
-   assert(transferErrors.length == 0, "createTransfers failed");
-
-   log("Transfer {transferId} created");
+   return unsafeCast(transferErrors);
 }) as "CreateTransfer";

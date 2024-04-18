@@ -85,7 +85,7 @@ struct TigerBeetleClientOptions {
 
 pub class TigerBeetle impl TigerBeetleClient {
    port: str;
-   url: str;
+   address: str;
    cluster: str;
    replica: str;
    replicaCount: str;
@@ -107,14 +107,15 @@ pub class TigerBeetle impl TigerBeetleClient {
       let dataFilename = "{this.node.addr.substring(this.node.addr.length - 8)}.tigerbeetle";
 
       let createDataService = new cloud.Service(inflight () => {
-         fs.remove("{pwd}/data/{dataFilename}", force: true);
          try {
-            util.shell(
-               "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster={this.cluster} --replica={this.replica} --replica-count={this.replicaCount} /data/{dataFilename}",
-            );
+            if fs.exists("{pwd}/data/{dataFilename}") == false {
+               util.shell(
+                  "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster={this.cluster} --replica={this.replica} --replica-count={this.replicaCount} /data/{dataFilename}",
+               );
+            }
          } catch error {
-            // pass
             log("failed to format data file data/{dataFilename}. error: {error}");
+            throw error;
          }
       }) as "CreateDataService";
       nodeof(createDataService).hidden = true;
@@ -137,25 +138,25 @@ pub class TigerBeetle impl TigerBeetleClient {
       nodeof(container).hidden = true;
 
       this.port = state.token("port");
-      this.url = state.token("url");
-      let resolveUrlService = new cloud.Service(inflight () => {
+      this.address = state.token("address");
+      let resolveService = new cloud.Service(inflight () => {
          state.set("port", container.hostPort);
-         state.set("url", "http://127.0.0.1:{container.hostPort!}");
-      }) as "ResolveUrlService";
-      nodeof(resolveUrlService).hidden = true;
+         state.set("address", "127.0.0.1:{container.hostPort!}");
+      }) as "ResolveService";
+      nodeof(resolveService).hidden = true;
 
       new ui.Field(
          "Port",
          inflight () => {
             return this.port;
          },
-      ) as "PortUI";
+      ) as "PortField";
       new ui.Field(
-         "URL",
+         "address",
          inflight () => {
-            return this.url;
+            return this.address;
          },
-      ) as "UrlUI";
+      ) as "AddressField";
       new ui.Field(
          "Data File",
          inflight () => {

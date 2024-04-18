@@ -1,7 +1,10 @@
 {
   "scripts": {
     "dev": "wing it src/main.w",
-    "test": "wing test src/tigerbeetle.test.w"
+    "test": "wing test src/tigerbeetle.test.w",
+    "compile-demo": "wing compile src/ec2.main.w -t tf-aws",
+    "deploy-demo": "cd src/target/ec2.main.tfaws && terraform init && terraform apply -auto-approve",
+    "destroy-demo": "cd src/target/ec2.main.tfaws && terraform destroy -auto-approve"
   },
   "dependencies": {
     "@cdktf/provider-aws": "^19.14.0",
