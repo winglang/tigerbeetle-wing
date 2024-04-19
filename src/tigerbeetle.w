@@ -27,7 +27,12 @@ pub class TigerBeetle impl types.TigerBeetleClient {
          this.dataFilename = implementation.dataFilename;
          this.client = implementation;
       } elif target == "tf-aws" {
-         let implementation = new tfaws.TigerBeetleTfAws(props);
+         let implementation = new tfaws.TigerBeetleTfAws(
+            clusterId: props.clusterId,
+            associatePublicIpAddress: props.associatePublicIpAddress,
+            subnetId: props.subnetId,
+            vpcSecurityGroupIds: props.vpcSecurityGroupIds,
+         );
          nodeof(implementation).hidden = true;
          this.port = implementation.port;
          this.address = implementation.address;

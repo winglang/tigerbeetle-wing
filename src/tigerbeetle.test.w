@@ -4,6 +4,7 @@ bring "./tigerbeetle.w" as tigerbeetle;
 
 let instance = new tigerbeetle.TigerBeetle(
    clusterId: "1",
+   associatePublicIpAddress: true,
 );
 
 test "Create accounts and transfer" {

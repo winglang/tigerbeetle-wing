@@ -12,7 +12,7 @@ pnpm install
 pnpm run dev
 ```
 
-## Test
+## Test (locally)
 
 ```sh
 pnpm run test
