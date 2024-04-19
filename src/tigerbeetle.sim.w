@@ -11,8 +11,8 @@ pub class TigerBeetleSim impl types.TigerBeetleClient {
    pub replica: str;
    pub replicaCount: str;
    pub dataFilename: str;
-   new() {
-      this.clusterId = "0";
+   new(props: types.TigerBeetleProps) {
+      this.clusterId = props.clusterId;
       this.replica = "0";
       this.replicaCount = "1";
 

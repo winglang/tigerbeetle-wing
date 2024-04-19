@@ -4,6 +4,7 @@ bring fs;
 bring ui;
 bring "./tigerbeetle.types.w" as types;
 bring "./tigerbeetle.sim.w" as sim;
+bring "./tigerbeetle.tf-aws.w" as tfaws;
 
 pub class TigerBeetle impl types.TigerBeetleClient {
    pub port: str;
@@ -13,16 +14,31 @@ pub class TigerBeetle impl types.TigerBeetleClient {
    pub replicaCount: str;
    pub dataFilename: str;
    client: types.TigerBeetleClient;
-   new() {
-      let implementation = new sim.TigerBeetleSim();
-      nodeof(implementation).hidden = true;
-      this.port = implementation.port;
-      this.address = implementation.address;
-      this.clusterId = implementation.clusterId;
-      this.replica = implementation.replica;
-      this.replicaCount = implementation.replicaCount;
-      this.dataFilename = implementation.dataFilename;
-      this.client = implementation;
+   new(props: types.TigerBeetleProps) {
+      let target = util.env("WING_TARGET");
+      if target == "sim" {
+         let implementation = new sim.TigerBeetleSim(props);
+         nodeof(implementation).hidden = true;
+         this.port = implementation.port;
+         this.address = implementation.address;
+         this.clusterId = implementation.clusterId;
+         this.replica = implementation.replica;
+         this.replicaCount = implementation.replicaCount;
+         this.dataFilename = implementation.dataFilename;
+         this.client = implementation;
+      } elif target == "tf-aws" {
+         let implementation = new tfaws.TigerBeetleTfAws(props);
+         nodeof(implementation).hidden = true;
+         this.port = implementation.port;
+         this.address = implementation.address;
+         this.clusterId = implementation.clusterId;
+         this.replica = implementation.replica;
+         this.replicaCount = implementation.replicaCount;
+         this.dataFilename = implementation.dataFilename;
+         this.client = implementation;
+      } else {
+         throw "unsupported target {target}";
+      }
 
       new ui.Field(
          "Address",

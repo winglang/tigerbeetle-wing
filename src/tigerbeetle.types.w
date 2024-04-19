@@ -75,3 +75,10 @@ pub struct TigerBeetleClientOptions {
    concurrency_max: num?;
    replica_addresses: Array<str>;
 }
+
+pub struct TigerBeetleProps {
+   clusterId: str; // bigint;
+   associatePublicIpAddress: bool?;
+   subnetId: str?;
+   vpcSecurityGroupIds: Array<str>?;
+}

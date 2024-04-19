@@ -11,8 +11,8 @@ patchedDependencies:
 
 dependencies:
   '@cdktf/provider-aws':
-    specifier: ^19.14.0
-    version: 19.14.0(cdktf@0.20.7)(constructs@10.3.0)
+    specifier: ^19.15.0
+    version: 19.15.0(cdktf@0.20.7)(constructs@10.3.0)
   winglang:
     specifier: ^0.71.0
     version: 0.71.0(constructs@10.3.0)(typescript@5.4.5)
@@ -30,8 +30,8 @@ devDependencies:
 
 packages:
 
-  /@cdktf/provider-aws@19.14.0(cdktf@0.20.7)(constructs@10.3.0):
-    resolution: {integrity: sha512-00AeWFyT+FWgkTf1h/hoUJGGL5l3RAtG32qtU+6k+PXfIn6vQz3weuRMonQdHGcKIQAuJrqXmEckOR26Hx/ClQ==}
+  /@cdktf/provider-aws@19.15.0(cdktf@0.20.7)(constructs@10.3.0):
+    resolution: {integrity: sha512-zseg9Y+XxPI0OvyPLcitoXt6kAdkV97m6z8aNtDrbjEFR5TEbT/vpAzqNbpRJ7J+6xU0VaMF6oL7E/hmSuzNyQ==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       cdktf: ^0.20.0

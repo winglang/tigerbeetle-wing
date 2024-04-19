@@ -2,7 +2,9 @@ bring math;
 bring expect;
 bring "./tigerbeetle.w" as tigerbeetle;
 
-let instance = new tigerbeetle.TigerBeetle();
+let instance = new tigerbeetle.TigerBeetle(
+   clusterId: "1",
+);
 
 test "Create accounts and transfer" {
    let randomBigInt = inflight () => {
