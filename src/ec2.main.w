@@ -1,22 +1,10 @@
 bring "cdktf" as cdktf;
 bring "@cdktf/provider-aws" as aws;
 
-let iamInstanceProfile = "SSM"; // Role name used to allow SSM to manage the instance.
+// let iamInstanceProfile = "SSM"; // Role name used to allow SSM to manage the instance.
 
-let ami = "ami-0e8a62bd8368b0881"; // Amazon Linux 2 LTS Arm64 Kernel 5.10 AMI 2.0.20240329.0 arm64 HVM gp2
-// let instanceType = "t4g.large";
-let instanceType = "t4g.medium";
-// let userData = "#!/bin/bash
-// sudo yum update -y
-// sudo yum install git unzip -y
-// sudo mkdir /app
-// sudo chmod 777 /app
-// cd /app
-// git clone https://github.com/coilhq/tigerbeetle.git tigerbeetle-src --no-depth
-// ./tigerbeetle-src/bootstrap.sh
-// ./tigerbeetle-src/tigerbeetle format --cluster=0 --replica=0 --replica-count=1 0_0.tigerbeetle
-// ./tigerbeetle-src/tigerbeetle start --addresses=0.0.0.0:3000 0_0.tigerbeetle
-// ";
+let ami = "ami-0e8a62bd8368b0881"; // Amazon Linux 2 LTS Arm64 Kernel 5.10 AMI 2.0.20240329.0 arm64 HVM gp2.
+let instanceType = "t4g.medium"; // Minimum size that worked for the AMI.
 let userData = "#!/bin/bash
 yum update -y
 yum install git unzip -y
