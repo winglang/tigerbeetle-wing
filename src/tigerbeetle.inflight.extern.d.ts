@@ -3,7 +3,7 @@ export default interface extern {
 }
 export interface TigerBeetleClientOptions {
   readonly cluster_id: string;
-  readonly concurrency_max: number;
+  readonly concurrency_max?: (number) | undefined;
   readonly replica_addresses: (readonly (string)[]);
 }
 export interface Account {

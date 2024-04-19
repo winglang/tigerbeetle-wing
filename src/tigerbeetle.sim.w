@@ -7,12 +7,12 @@ bring "./tigerbeetle.types.w" as types;
 pub class TigerBeetleSim impl types.TigerBeetleClient {
    pub port: str;
    pub address: str;
-   pub cluster: str;
+   pub clusterId: str;
    pub replica: str;
    pub replicaCount: str;
    pub dataFilename: str;
    new() {
-      this.cluster = "0";
+      this.clusterId = "0";
       this.replica = "0";
       this.replicaCount = "1";
 
@@ -32,7 +32,7 @@ pub class TigerBeetleSim impl types.TigerBeetleClient {
          try {
             if fs.exists("{pwd}/data/{this.dataFilename}") == false {
                util.shell(
-                  "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster={this.cluster} --replica={this.replica} --replica-count={this.replicaCount} /data/{this.dataFilename}",
+                  "docker run -v {pwd}/data:/data ghcr.io/tigerbeetle/tigerbeetle format --cluster={this.clusterId} --replica={this.replica} --replica-count={this.replicaCount} /data/{this.dataFilename}",
                );
             }
          } catch error {
@@ -74,8 +74,7 @@ pub class TigerBeetleSim impl types.TigerBeetleClient {
 
    inflight new() {
       this.client = TigerBeetleSim.createClient(
-         cluster_id: this.cluster,
-         concurrency_max: 100,
+         cluster_id: this.clusterId,
          replica_addresses: [
             this.port,
          ],

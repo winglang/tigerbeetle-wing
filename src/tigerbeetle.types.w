@@ -72,6 +72,6 @@ pub inflight interface TigerBeetleClient {
 
 pub struct TigerBeetleClientOptions {
    cluster_id: str; // bigint;
-   concurrency_max: num;
+   concurrency_max: num?;
    replica_addresses: Array<str>;
 }

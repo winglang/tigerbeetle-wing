@@ -8,7 +8,7 @@ bring "./tigerbeetle.sim.w" as sim;
 pub class TigerBeetle impl types.TigerBeetleClient {
    pub port: str;
    pub address: str;
-   pub cluster: str;
+   pub clusterId: str;
    pub replica: str;
    pub replicaCount: str;
    pub dataFilename: str;
@@ -18,7 +18,7 @@ pub class TigerBeetle impl types.TigerBeetleClient {
       nodeof(implementation).hidden = true;
       this.port = implementation.port;
       this.address = implementation.address;
-      this.cluster = implementation.cluster;
+      this.clusterId = implementation.clusterId;
       this.replica = implementation.replica;
       this.replicaCount = implementation.replicaCount;
       this.dataFilename = implementation.dataFilename;
@@ -30,6 +30,27 @@ pub class TigerBeetle impl types.TigerBeetleClient {
             return this.address;
          },
       ) as "AddressField";
+
+      new ui.Field(
+         "Cluster ID",
+         inflight () => {
+            return this.clusterId;
+         },
+      ) as "ClusterField";
+
+      new ui.Field(
+         "Replica",
+         inflight () => {
+            return this.replica;
+         },
+      ) as "ReplicaField";
+
+      new ui.Field(
+         "Replica Count",
+         inflight () => {
+            return this.replicaCount;
+         },
+      ) as "ReplicaCountField";
 
       new ui.Field(
          "Data File",
