@@ -3,8 +3,7 @@ bring expect;
 bring "./tigerbeetle.w" as tigerbeetle;
 
 let instance = new tigerbeetle.TigerBeetle(
-   clusterId: "1",
-   associatePublicIpAddress: true,
+   clusterId: "0",
 );
 
 test "Create accounts and transfer" {

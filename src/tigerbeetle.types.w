@@ -78,7 +78,6 @@ pub struct TigerBeetleClientOptions {
 
 pub struct TigerBeetleProps {
    clusterId: str; // bigint;
-   associatePublicIpAddress: bool?;
+   vpcId: str?;
    subnetId: str?;
-   vpcSecurityGroupIds: Array<str>?;
 }
