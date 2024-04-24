@@ -7,50 +7,28 @@ bring "./tigerbeetle.sim.w" as sim;
 bring "./tigerbeetle.tf-aws.w" as tfaws;
 
 pub class TigerBeetle impl types.TigerBeetleClient {
-   pub port: str;
-   pub address: str;
+   pub replicaAddresses: Array<str>;
    pub clusterId: str;
-   pub replica: str;
-   pub replicaCount: str;
-   pub dataFilename: str;
-   client: types.TigerBeetleClient;
+   pub replicaCount: num;
    new(props: types.TigerBeetleProps) {
       let target = util.env("WING_TARGET");
       if target == "sim" {
          let implementation = new sim.TigerBeetleSim(props);
          nodeof(implementation).hidden = true;
-         this.port = implementation.port;
-         this.address = implementation.address;
+         this.replicaAddresses = implementation.replicaAddresses;
          this.clusterId = implementation.clusterId;
-         this.replica = implementation.replica;
          this.replicaCount = implementation.replicaCount;
-         this.dataFilename = implementation.dataFilename;
-         this.client = implementation;
       } elif target == "tf-aws" {
          let implementation = new tfaws.TigerBeetleTfAws(
             clusterId: props.clusterId,
-            associatePublicIpAddress: props.associatePublicIpAddress,
-            subnetId: props.subnetId,
-            vpcSecurityGroupIds: props.vpcSecurityGroupIds,
          );
          nodeof(implementation).hidden = true;
-         this.port = implementation.port;
-         this.address = implementation.address;
+         this.replicaAddresses = implementation.replicaAddresses;
          this.clusterId = implementation.clusterId;
-         this.replica = implementation.replica;
          this.replicaCount = implementation.replicaCount;
-         this.dataFilename = implementation.dataFilename;
-         this.client = implementation;
       } else {
          throw "unsupported target {target}";
       }
-
-      new ui.Field(
-         "Address",
-         inflight () => {
-            return this.address;
-         },
-      ) as "AddressField";
 
       new ui.Field(
          "Cluster ID",
@@ -60,25 +38,29 @@ pub class TigerBeetle impl types.TigerBeetleClient {
       ) as "ClusterField";
 
       new ui.Field(
-         "Replica",
+         "Replica Addresses",
          inflight () => {
-            return this.replica;
+            return this.replicaAddresses.join(", ");
          },
       ) as "ReplicaField";
 
       new ui.Field(
          "Replica Count",
          inflight () => {
-            return this.replicaCount;
+            return "{this.replicaCount}";
          },
       ) as "ReplicaCountField";
+   }
 
-      new ui.Field(
-         "Data File",
-         inflight () => {
-            return "data/{this.dataFilename}";
-         },
-      ) as "DataFileField";
+   extern "./tigerbeetle.inflight.ts" inflight static createClient(options: types.TigerBeetleClientOptions): types.TigerBeetleClient;
+
+   inflight client: types.TigerBeetleClient;
+
+   inflight new() {
+      this.client = TigerBeetle.createClient(
+         cluster_id: this.clusterId,
+         replica_addresses: this.replicaAddresses,
+      );
    }
 
    pub inflight createAccounts(batch: Array<types.Account>): Array<types.CreateAccountsError> {

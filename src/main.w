@@ -5,8 +5,11 @@ bring fs;
 bring ui;
 bring "./tigerbeetle.w" as tigerbeetle;
 
+// You may already have a VPC and subnet you want to use, in which case you can
+// set these variables to the appropriate values. If you don't have a VPC and
+// subnet, the code below will create them for you.
+let var vpcId: str? = nil;
 let var subnetId: str? = nil;
-let var vpcSecurityGroupIds: Array<str>? = nil;
 if util.env("WING_TARGET") == "tf-aws" {
    bring "@cdktf/provider-aws" as aws;
 
@@ -73,97 +76,82 @@ if util.env("WING_TARGET") == "tf-aws" {
       routeTableId: privateRouteTable.id,
    ) as "PrivateRouteTableAssociation";
 
-   let securityGroup = new aws.securityGroup.SecurityGroup(
-      vpcId: vpc.id,
-      ingress: [
-      {
-         fromPort: 3000,
-         toPort: 3000,
-         protocol: "tcp",
-         cidrBlocks: ["0.0.0.0/0"],
-      },
-      ],
-      egress: [
-      {
-         fromPort: 0,
-         toPort: 0,
-         protocol: "-1", // Allow all outbound traffic
-         cidrBlocks: ["0.0.0.0/0"],
-      },
-      ],
-   );
+   vpcId = vpc.id;
 
+   // Using the public subnet so we can reach the TigerBeetle replicas from our computer.
    subnetId = publicSubnet.id;
-   vpcSecurityGroupIds = [securityGroup.id];
 }
 
 let instance = new tigerbeetle.TigerBeetle(
    clusterId: "0",
-   associatePublicIpAddress: true,
+   vpcId: vpcId,
    subnetId: subnetId,
-   vpcSecurityGroupIds: vpcSecurityGroupIds,
 );
 
-new cloud.Function(inflight (event) => {
-   assert(event? && event != "");
-   let accountId: str = unsafeCast(event);
+// These testing functions only work in the simulator for now.
+// See https://github.com/winglang/tigerbeetle-wing/issues/1.
+if util.env("WING_TARGET") == "sim" {
+   new cloud.Function(inflight (event) => {
+      assert(event? && event != "");
+      let accountId: str = unsafeCast(event);
 
-   log("Creating account {accountId}...");
-   let accountErrors = instance.createAccounts([
-      {
-         id: accountId,
-         debits_pending: "0",
-         debits_posted: "0",
-         credits_pending: "0",
-         credits_posted: "0",
-         user_data_128: "0",
-         user_data_64: "0",
-         user_data_32: 0,
-         reserved: 0,
-         ledger: 1,
-         code: 1,
-         flags: 0,
-         timestamp: "0",
-      },
-   ]);
-   return unsafeCast(accountErrors);
-}) as "CreateAccount";
+      log("Creating account {accountId}...");
+      let accountErrors = instance.createAccounts([
+         {
+            id: accountId,
+            debits_pending: "0",
+            debits_posted: "0",
+            credits_pending: "0",
+            credits_posted: "0",
+            user_data_128: "0",
+            user_data_64: "0",
+            user_data_32: 0,
+            reserved: 0,
+            ledger: 1,
+            code: 1,
+            flags: 0,
+            timestamp: "0",
+         },
+      ]);
+      return unsafeCast(accountErrors);
+   }) as "CreateAccount";
 
-new cloud.Function(inflight (event) => {
-   assert(event? && event != "");
-   let accountId: str = unsafeCast(event);
+   new cloud.Function(inflight (event) => {
+      assert(event? && event != "");
+      let accountId: str = unsafeCast(event);
 
-   log("Looking up account {accountId}...");
-   let accounts = instance.lookupAccounts([accountId]);
-   return unsafeCast(accounts);
-}) as "LookupAccount";
+      log("Looking up account {accountId}...");
+      let accounts = instance.lookupAccounts([accountId]);
+      return unsafeCast(accounts);
+   }) as "LookupAccount";
 
-new cloud.Function(inflight (event) => {
-   assert(event? && event != "");
-   let parts = event?.split(",")!;
-   assert(parts.length == 4);
-   let transferId: str = parts.at(0);
-   let debitAccountId: str = parts.at(1);
-   let creditAccountId: str = parts.at(2);
-   let amount: str = parts.at(3);
+   new cloud.Function(inflight (event) => {
+      assert(event? && event != "");
+      let parts = event?.split(",")!;
+      assert(parts.length == 4);
+      let transferId: str = parts.at(0);
+      let debitAccountId: str = parts.at(1);
+      let creditAccountId: str = parts.at(2);
+      let amount: str = parts.at(3);
 
-   log("Creating a transfer (id {transferId}, debit account id {debitAccountId}, credit account id {creditAccountId}, amount {amount})...");
-   let transferErrors = instance.createTransfers([
-      {
-         id: transferId,
-         debit_account_id: debitAccountId,
-         credit_account_id: creditAccountId,
-         amount: amount,
-         pending_id: "0",
-         user_data_128: "0",
-         user_data_64: "0",
-         user_data_32: 0,
-         timeout: 0,
-         ledger: 1,
-         code: 1,
-         flags: 0,
-         timestamp: "0",
-      },
-   ]);
-   return unsafeCast(transferErrors);
-}) as "CreateTransfer";
+      log("Creating a transfer (id {transferId}, debit account id {debitAccountId}, credit account id {creditAccountId}, amount {amount})...");
+      let transferErrors = instance.createTransfers([
+         {
+            id: transferId,
+            debit_account_id: debitAccountId,
+            credit_account_id: creditAccountId,
+            amount: amount,
+            pending_id: "0",
+            user_data_128: "0",
+            user_data_64: "0",
+            user_data_32: 0,
+            timeout: 0,
+            ledger: 1,
+            code: 1,
+            flags: 0,
+            timestamp: "0",
+         },
+      ]);
+      return unsafeCast(transferErrors);
+   }) as "CreateTransfer";
+}
