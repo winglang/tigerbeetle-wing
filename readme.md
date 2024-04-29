@@ -20,14 +20,6 @@ pnpm install
 
 ### Dev
 
-> [!WARNING]
-> pnpm script runner (and npm > `10.5.2`) have a problem handling SIGTERM signals. This will cause the Wing Console not to stop and remove the docker containers. For now, you will have to manually stop the Wing Console and remove the docker containers:
->
-> ```sh
-> # Remove all docker containers (from previous runs)
-> docker rm -f $(docker ps -aq)
-> ```
-
 ```sh
 pnpm run dev
 ```

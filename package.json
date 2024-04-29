@@ -9,8 +9,8 @@
     "test": "wing test src/tigerbeetle.test.w"
   },
   "dependencies": {
-    "@cdktf/provider-aws": "^19.15.0",
-    "winglang": "^0.72.4"
+    "@cdktf/provider-aws": "^19.16.0",
+    "winglang": "^0.73.10"
   },
   "devDependencies": {
     "cdktf": "^0.20.7",
